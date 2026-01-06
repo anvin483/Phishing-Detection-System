@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phishing Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+<div class="container">
+    <h1>🔐 Phishing Detection System</h1>
+    <p class="accuracy">Model Accuracy: 94.2%</p>
+
+    <!-- Tabs -->
+    <div class="tabs">
+        <button class="tab active" onclick="showTab('email')">📧 Email</button>
+        <button class="tab" onclick="showTab('url')">🔗 URL</button>
+    </div>
+
+    <!-- Email Tab -->
+    <div id="email" class="tab-content active">
+        <form method="POST">
+            <textarea name="email_text" placeholder="Paste email content here..." required></textarea>
+            <button type="submit">Analyze Email</button>
+        </form>
+
+        {% if email_result %}
+            <div class="result show">
+                {{ email_result }}
+            </div>
+        {% endif %}
+
+        {% if confidence %}
+            <p class="confidence">Confidence: {{ confidence }}%</p>
+        {% endif %}
+    </div>
+
+    <!-- URL Tab -->
+    <div id="url" class="tab-content">
+        <input type="text" placeholder="Paste URL here" disabled>
+        <p class="coming">URL detection coming soon 🚧</p>
+    </div>
+</div>
+
+<!-- JS -->
+<script>
+function showTab(tab) {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+    document.getElementById(tab).classList.add('active');
+}
+</script>
+
+</body>
+</html>
