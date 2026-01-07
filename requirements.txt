@@ -1,4 +1,7 @@
 flask
+numpy
 pandas
 scikit-learn
-numpy
+joblib
+shap
+plotly
